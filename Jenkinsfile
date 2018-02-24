@@ -7,22 +7,18 @@ pipeline {
   }
 
   stages{
-        
-   stage ('Run') {
+    stage ('Run') {
         steps {
             sh 'echo "TODAY IS `date`"'
             sh 'echo `date` > /tmp/jenkins_was_here'
         }
-        post {
+    }
+    post {
             failure {
                 sh 'echo "THE PIPELINE HAS BEEN FAILED"'
             }
-        }
-        
-   }
-
+    }
   }
-
-    
+ 
     
 }
