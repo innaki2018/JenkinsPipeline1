@@ -1,22 +1,28 @@
 pipeline {
-    agent any
-    
-    
-    triggers {
-         pollSCM('* * * * *') // Polling Source Control
-     }
+  
+  agent any
+ 
+  triggers {
+         pollSCM('* * 24 02 *') 
+  }
 
-stages{
-        stage('Build'){
-            steps {
-                sh 'mvn clean package'
-            }
-            post {
-                success {
-                    echo 'Now Archiving...'
-                    archiveArtifacts artifacts: '**/target/*.war'
-                }
+  stages{
+        
+   stage ('Run') {
+        steps {
+            sh 'echo "Today is `date`"'
+            sh 'date >! /home/innaki/tmp/jenkins_was_here'
+        }
+        post {
+            failure {
+                mail to: inna.kinevsky@gmail.com, subject: 'The Pipeline failed'
             }
         }
-}
+        
+   }
+
+  }
+
+    
+    
 }
