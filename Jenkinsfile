@@ -11,7 +11,7 @@ pipeline {
    stage ('Run') {
         steps {
             sh 'echo "Today is `date`"'
-            sh '`date` >! /home/innaki/tmp/jenkins_was_here'
+            sh '`date` >! /tmp/jenkins_was_here'
         }
         post {
             failure {
